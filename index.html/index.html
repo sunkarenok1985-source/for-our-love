@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Для моей любимой</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to bottom, #fff0f5, #ffe4e1);
+            color: #d87093;
+            overflow-x: hidden;
+            text-align: center;
+        }
+
+        /* Анимация сердечек на фоне */
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            bottom: -100px;
+            background-color: #ff69b4;
+            display: inline-block;
+            height: 30px;
+            margin: 0 10px;
+            position: relative;
+            top: 0;
+            transform: rotate(-45deg);
+            width: 30px;
+            opacity: 0.5;
+            animation: move 10s infinite linear;
+        }
+
+        .heart:before, .heart:after {
+            content: "";
+            background-color: #ff69b4;
+            border-radius: 50%;
+            height: 30px;
+            position: absolute;
+            width: 30px;
+        }
+
+        .heart:before { top: -15px; left: 0; }
+        .heart:after { left: 15px; top: 0; }
+
+        @keyframes move {
+            0% { transform: rotate(-45deg) translateY(0); opacity: 0.8; }
+            100% { transform: rotate(-45deg) translateY(-1000px); opacity: 0; }
+        }
+
+        /* Контент */
+        header { padding: 50px 20px; }
+        h1 { font-size: 3rem; margin-bottom: 10px; text-shadow: 2px 2px #fff; }
+        p.subtitle { font-style: italic; font-size: 1.2rem; }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .photo-card {
+            background: white;
+            padding: 10px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .photo-card:hover { transform: scale(1.05) rotate(2deg); }
+
+        .photo-card img {
+            width: 100%;
+            border-radius: 10px;
+            display: block;
+        }
+
+        footer { padding: 100px 20px; font-size: 1.5rem; font-weight: bold; }
+        
+        .btn-love {
+            background: #ff69b4;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hearts" id="hearts-container"></div>
+
+    <header>
+        <h1>Наша история в каждом кадре ❤️</h1>
+        <p class="subtitle">Ты — самое лучшее, что со мной случилось</p>
+    </header>
+
+    <div class="gallery">
+        <div class="photo-card">
+            <img src="ССЫЛКА_НА_ФОТО_1" alt="Наше фото">
+            <p>Тут наше первое свидание...</p>
+        </div>
+        <div class="photo-card">
+            <img src="ССЫЛКА_НА_ФОТО_2" alt="Наше фото">
+            <p>А тут мы просто счастливы</p>
+        </div>
+        <div class="photo-card">
+            <img src="ССЫЛКА_НА_ФОТО_3" alt="Наше фото">
+            <p>Обожаю твою улыбку</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>Я тебя очень сильно люблю!</p>
+        <button class="btn-love" onclick="alert('Ты — моё всё!')">Нажми сюда</button>
+    </footer>
+
+    <script>
+        // Создаем летающие сердечки
+        const container = document.getElementById('hearts-container');
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 7 + 's';
+            container.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 10000);
+        }
+        setInterval(createHeart, 500);
+    </script>
+</body>
+</html>
